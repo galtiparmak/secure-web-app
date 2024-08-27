@@ -26,14 +26,12 @@ public class ManagerController {
         this.managerService = managerService;
     }
 
-    // Endpoint for the manager to view all users except admins
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> getAllUsersExceptAdmins() {
         List<UserDTO> users = managerService.getAllUsersExceptAdmins();
         return ResponseEntity.ok(users);
     }
 
-    // Endpoint for a manager to view a specific user's information by username
     @GetMapping("/user/{username}")
     public ResponseEntity<UserDTO> getUserInformation(@PathVariable String username) {
         UserDTO userDTO = managerService.getUserInformation(username);

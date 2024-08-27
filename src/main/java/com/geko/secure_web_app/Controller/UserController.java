@@ -31,5 +31,6 @@ public class UserController {
         UserDTO userDTO = userService.getMyInformation(username);
         return ResponseEntity.ok(userDTO);
     }
+    // http://localhost:8080/api/user/me
 }
 
