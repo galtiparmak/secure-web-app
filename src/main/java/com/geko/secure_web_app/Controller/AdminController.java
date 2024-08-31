@@ -22,7 +22,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/assign-role")
+    @PutMapping("/assign-role")
     public ResponseEntity<String> assignRole(@RequestParam String username, @RequestParam Role role) {
         adminService.assignRole(username, role);
         return ResponseEntity.ok("User role updated successfully");
@@ -32,6 +32,6 @@ public class AdminController {
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = adminService.getAllUsers();
         return ResponseEntity.ok(users);
-    }
+    } // http://localhost:8080/api/admin/users
 }
 

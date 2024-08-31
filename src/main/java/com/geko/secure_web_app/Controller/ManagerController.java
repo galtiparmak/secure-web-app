@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/manager")
@@ -22,7 +21,7 @@ public class ManagerController {
     private final ManagerService managerService;
 
     @Autowired
-    public ManagerController(ManagerService managerService, AuthenticationService authenticationService) {
+    public ManagerController(ManagerService managerService) {
         this.managerService = managerService;
     }
 
@@ -30,12 +29,12 @@ public class ManagerController {
     public ResponseEntity<List<UserDTO>> getAllUsersExceptAdmins() {
         List<UserDTO> users = managerService.getAllUsersExceptAdmins();
         return ResponseEntity.ok(users);
-    }
+    } // http://localhost:8080/api/manager/users
 
     @GetMapping("/user/{username}")
     public ResponseEntity<UserDTO> getUserInformation(@PathVariable String username) {
         UserDTO userDTO = managerService.getUserInformation(username);
         return ResponseEntity.ok(userDTO);
-    }
+    } // http://localhost:8080/api/manager/user/testuser
 }
 
