@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-web-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: secure-web-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: secure-web-app
+    spec:
+      containers:
+        - name: secure-web-app
+          image: gekoline/secure-web-app-springboot:v1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: mysql
+
+            - name: DB_DATABASE
+              value: securewebapp
+
+            - name: DB_USER
+              value: username
+
+            - name: DB_PASSWORD
+              value: password
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: secure-web-app-service
+spec:
+  type: NodePort
+  selector:
+    app: secure-web-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30001
