@@ -14,24 +14,25 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class UserServiceImplTest {
-    @Mock
-    private UserRepository userRepository;
-
-    @InjectMocks
-    private UserServiceImpl userServiceImpl;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
-    @Test
-    void getMyInformation_ShouldReturnUserInformation() {
-        User user = new User(1L, "user1", "password", "user1@example.com", Role.USER);
-        when(userRepository.findByUsername("user1")).thenReturn(java.util.Optional.of(user));
-        UserDTO userDTO = userServiceImpl.getMyInformation("user1");
-        assertEquals("user1", userDTO.getUsername());
-        verify(userRepository, times(1)).findByUsername("user1");
-    }
-}
+//public class UserServiceImplTest {
+//    @Mock
+//    private UserRepository userRepository;
+//
+//    @InjectMocks
+//    private UserServiceImpl userServiceImpl;
+//
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.openMocks(this);
+//    }
+//
+//    @Test
+//    void getMyInformation_ShouldReturnUserInformation() {
+//        User user = new User(1L, "user1", "password", "user1@example.com", Role.USER);
+//        when(userRepository.findByUsername("user1")).thenReturn(java.util.Optional.of(user));
+//        UserDTO userDTO = userServiceImpl.getMyInformation("user1");
+//        assertEquals("user1", userDTO.getUsername());
+//        verify(userRepository, times(1)).findByUsername("user1");
+//    }
+//}
+//

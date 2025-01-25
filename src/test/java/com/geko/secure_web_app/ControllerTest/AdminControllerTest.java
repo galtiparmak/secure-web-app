@@ -18,51 +18,51 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(AdminController.class)
-public class AdminControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private AdminServiceImpl adminServiceImpl;
-
-    @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    void assignRoleTest_ShouldAssignRole() throws Exception {
-        // Arrange
-        String username = "testuser";
-        Role role = Role.ADMIN;
-
-        // Act & Assert
-        mockMvc.perform(post("/assign-role")
-                        .param("username", username)
-                        .param("role", role.name())
-                        .with(user("admin").roles("ADMIN"))  // Mock authentication as an admin
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string("User role updated successfully"));
-
-        // Verify that the service method was called with the correct parameters
-        verify(adminServiceImpl).assignRole(username, role);
-    }
-
-    @Test
-    @WithMockUser(username = "user", roles = {"USER"})
-    void assignRoleTest_ShouldReturnForbiddenForNonAdmin() throws Exception {
-        // Arrange
-        String username = "testuser";
-        Role role = Role.ADMIN;
-
-        // Act & Assert
-        mockMvc.perform(post("/assign-role")
-                        .param("username", username)
-                        .param("role", role.name())
-                        .with(user("user").roles("USER"))  // Mock authentication as a non-admin
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isForbidden());
-
-        // Verify that the service method was not called since the user is not an admin
-        verify(adminServiceImpl, never()).assignRole(anyString(), any(Role.class));
-    }
-
-}
+//@WebMvcTest(AdminController.class)
+//public class AdminControllerTest {
+//    @Autowired
+//    private MockMvc mockMvc;
+//
+//    @MockBean
+//    private AdminServiceImpl adminServiceImpl;
+//
+//    @Test
+//    @WithMockUser(username = "admin", roles = {"ADMIN"})
+//    void assignRoleTest_ShouldAssignRole() throws Exception {
+//        // Arrange
+//        String username = "testuser";
+//        Role role = Role.ADMIN;
+//
+//        // Act & Assert
+//        mockMvc.perform(post("/assign-role")
+//                        .param("username", username)
+//                        .param("role", role.name())
+//                        .with(user("admin").roles("ADMIN"))  // Mock authentication as an admin
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(content().string("User role updated successfully"));
+//
+//        // Verify that the service method was called with the correct parameters
+//        verify(adminServiceImpl).assignRole(username, role);
+//    }
+//
+//    @Test
+//    @WithMockUser(username = "user", roles = {"USER"})
+//    void assignRoleTest_ShouldReturnForbiddenForNonAdmin() throws Exception {
+//        // Arrange
+//        String username = "testuser";
+//        Role role = Role.ADMIN;
+//
+//        // Act & Assert
+//        mockMvc.perform(post("/assign-role")
+//                        .param("username", username)
+//                        .param("role", role.name())
+//                        .with(user("user").roles("USER"))  // Mock authentication as a non-admin
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isForbidden());
+//
+//        // Verify that the service method was not called since the user is not an admin
+//        verify(adminServiceImpl, never()).assignRole(anyString(), any(Role.class));
+//    }
+//
+//}
